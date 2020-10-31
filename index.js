@@ -6,14 +6,14 @@ const express = require("express");
 const app = express();
 const PORT = process.env.PORT || 8001;
 
-app.get("/call", (req, res) => {
+app.get("/call/:sevenDigitNumber", (req, res) => {
   res.send("calling");
   client.calls
     .create({
       url: "http://demo.twilio.com/docs/classic.mp3",
-      sendDigits: `${process.env.SENDDIGITS}`, //extensions
+      //sendDigits: `${process.env.SENDDIGITS}`, //extensions
       from: `+${process.env.FROM}`,
-      to: `+${process.env.TO}`
+      to: `+1${req.params.sevenDigitNumber}`
     })
     .then(call => console.log(call));
 });
